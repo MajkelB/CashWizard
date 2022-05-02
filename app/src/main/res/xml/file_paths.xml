@@ -1,0 +1,13 @@
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <external-files-path name="my_images2" path="Android/data/eu.pp.cashwizard/files/Pictures" />-->
+<!--    <external-files-path name="my_images" path="Android/data/eu.pp.cashwizard/files/DCIM" />-->
+    <external-files-path name="images_app" path="Android/data/eu.pp.cashwizard/files/Pictures" />
+    <external-path name="images" path="." />
+    <external-files-path name="Pictures" path="."/>
+
+<!--    files-path-->
+<!--    cache-path-->
+<!--    external-path-->
+<!--    external-files-path-->
+<!--    external-cache-path-->
+</paths>

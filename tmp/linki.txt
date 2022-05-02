@@ -1,0 +1,3 @@
+Custom switch
+
+https://medium.com/mobile-app-development-publication/customizing-switch-using-xml-ca0d37204a86

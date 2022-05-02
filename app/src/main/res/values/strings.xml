@@ -1,9 +1,45 @@
 <resources>
-    <string name="app_name">Cash Wizard</string>
+    <string name="app_name">CashWizard</string>
 
-    <string name="title_activity_welcome_screen">WelcomeScreen</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="title_home">Home</string><string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <!-- Dialogs -->
+    <string name="dialog_info_label">Info</string>
+    <string name="dialog_warning_label">Warning</string>
+    <string name="dialog_error_label">Error</string>
+    <string name="dialog_question_label">Question</string>
+
+    <!-- Exceptions -->
+    <string name="ex_config_load_error">Config load error</string>
+    <string name="ex_property_not_found">Property not found</string>
+    <string name="ex_property_parsing_error">Property parsing error</string>
+    <string name="ex_unknown">Unknown exception</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+    <!-- Screens -->
+    <!-- Welcome -->
+    <string name="welcome_appVersion_label">Version</string>
+    <string name="welcome_appVersionCode_label">Build</string>
+
+
+
+
+    <!-- Settings -->
+    <string name="settings_appVersion_label">Version</string>
+    <string name="settings_test_mode_label">Test mode</string>
+    <string name="settings_load_on_startup_label">Load on startup</string>
+    <string name="settings_save_on_exit_label">Save on exit</string>
+
+    <!-- Person details -->
+    <string name="person_details_no_crop_intent_error">"This device doesn't support the crop action!"</string>
+    <string name="person_details_change_photo_question">Do you want to change photo?</string>
+    <string name="person_details_take_new_photo_question">Do you want to take a new photo?</string>
+
+    <!-- Errors -->
+    <string name="person_id_error">Error while setting id for Person object</string>
+
+    <!-- Bill details -->
+    <string name="bill_details_no_payer_selected">"Payer must be selected!"</string>
+    <string name="bill_details_no_contributor_selected">"At least one contributor must be selected!"</string>
+
+
+
 </resources>

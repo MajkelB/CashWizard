@@ -1,0 +1,277 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".BillDetailsActivity">
+
+    <LinearLayout
+        android:id="@+id/billDetailsHeader"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <include layout="@layout/header"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/billDetailsBody"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/spider_background"
+        android:layout_marginTop="100dp"
+        app:layout_constraintTop_toBottomOf="@id/billDetailsHeader"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:orientation="vertical">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/billDetailsMainDataView"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="10dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:paddingTop="5dp"
+            android:paddingRight="10dp"
+
+
+            android:alpha="1.0"
+            android:orientation="horizontal">
+
+            <EditText
+                android:id="@+id/billDetailsDate"
+                android:layout_width="120dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:text="Date"
+                android:alpha="1.0"
+                android:clickable="true"
+                android:editable="false"
+                android:hint="Wybierz datę"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/billDetailsMainDataView"
+                style="@style/Medium_Text"/>
+
+            <EditText
+                android:id="@+id/billDetailsAmount"
+                android:layout_width="100dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="50dp"
+                android:text="Amount"
+                android:gravity="right"
+                app:layout_constraintStart_toEndOf="@id/billDetailsDate"
+                app:layout_constraintTop_toTopOf="@id/billDetailsMainDataView"
+                style="@style/Title_Text"/>
+
+            <!--<TextView-->
+                <!--android:id="@+id/billDetailsCurrency"-->
+                <!--android:layout_width="50dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:text="EUR"-->
+                <!--android:gravity="left"-->
+                <!--app:layout_constraintStart_toEndOf="@id/billDetailsAmount"-->
+                <!--app:layout_constraintTop_toTopOf="@id/billDetailsMainDataView"-->
+                <!--style="@style/Title_Text"/>-->
+
+            <Spinner
+                android:id="@+id/sBillDetailsCurrency"
+                android:layout_width="150dp"
+                android:layout_height="60dp"
+                android:layout_marginLeft="10dp"
+                android:background="@android:drawable/btn_dropdown"
+                android:spinnerMode="dropdown"
+                app:layout_constraintStart_toEndOf="@id/billDetailsAmount"
+                app:layout_constraintTop_toTopOf="@id/billDetailsMainDataView"
+                style="@style/Medium_Text"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:id="@+id/billDetailsSecondLineView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center_horizontal|center_vertical"
+            android:orientation="horizontal">
+
+            <!--<TextView-->
+            <!--android:id="@+id/loginUserLabel"-->
+            <!--android:layout_width="50dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_weight="1"-->
+            <!--android:layout_marginLeft="50dp"-->
+            <!--android:text="@string/"-->
+            <!--android:layout_gravity="center_horizontal|center_vertical"/>-->
+
+            <LinearLayout
+                android:id="@+id/billDetailsSecondLineLeftView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginRight="10dp"
+                android:layout_weight="0.7"
+                android:gravity="center_horizontal|center_vertical"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/billDetailsTitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_gravity="left" />
+
+                <EditText
+                    android:id="@+id/billDetailsDescription"
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    android:layout_gravity="left" />
+            </LinearLayout>
+
+            <ImageButton
+                android:layout_width="150dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal|center_vertical"
+                android:layout_weight="0.3"
+                android:src="@drawable/receipt" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/billDetailsThirdLineView"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:layout_gravity="center|center_horizontal"
+            android:gravity="right"
+            android:layout_marginBottom="0dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/billDetailsSecondLineView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+            <TextView
+                android:id="@+id/billDetailsPayersListTitle"
+                style="@style/Title_Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:gravity="center"
+                android:layout_weight="0.5"
+                android:text="Payers"
+               />
+
+            <TextView
+                android:id="@+id/billDetailsPeopleListTitle"
+                style="@style/Title_Text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:gravity="center"
+                android:layout_weight="0.5"
+                android:text="Contributors"
+                />
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lBillDetailsPeopleListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:layout_gravity="center|center_horizontal"
+            android:gravity="right"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="10dp"
+            app:layout_constraintTop_toBottomOf="@id/billDetailsThirdLineView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+            <ListView
+                android:id="@+id/lBillDetailsPayersList"
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:paddingBottom="60dp"
+                android:layout_marginBottom="60dp"
+                android:layout_weight="0.5"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                app:layout_constraintTop_toBottomOf="@id/billDetailsSecondLineView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+
+            <ListView
+                android:id="@+id/lBillDetailsPeopleList"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="60dp"
+                android:layout_marginBottom="60dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_weight="0.5"/>
+<!--                android:transcriptMode="alwaysScroll"-->
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/billDetailsButtonsView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-60dp"
+            android:layout_marginBottom="10dp"
+            android:gravity="bottom|center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/bBillDetailsCancel"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="10dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:focusedByDefault="true"
+                android:padding="0dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:src="@drawable/x" />
+
+            <ImageButton
+                android:id="@+id/bBillDetailsOk"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginRight="10dp"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                android:focusableInTouchMode="true"
+                android:focusable="true"
+                android:padding="0dp"
+                android:gravity="center_horizontal|center_vertical"
+                android:src="@drawable/v" />
+
+        </LinearLayout>
+
+        <ImageButton
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:layout_weight="0.2"
+            android:scaleType="fitXY"
+            android:src="@drawable/man" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

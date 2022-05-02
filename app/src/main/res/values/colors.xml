@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="primaryColor">#008577</color>
+    <color name="secondaryColor">#00574B</color>
+    <color name="primaryTextColor">#000000</color>
 
-    <color name="black_overlay">#66000000</color>
+    <color name="headerBackground">#FFFFFF</color>
+
+
+    <color name="welcomeProgressStart">#3F51B5</color>
+    <color name="welcomeProgressCenter">#ffffff</color>
+    <color name="welcomeProgressEnd">#3F51B5</color>
+
+    <color name="mainBackground">#FFFFFF</color>
+
+    <color name="listSelected">#FFAA2D</color>
+
+    <!-- Switch color -->
+    <color name="colorControlActivated">#000000</color>
+    <color name="colorForeground">#FFAA2D</color>
+    <color name="colorSwitchThumbNormal">#f1f1f1</color>
+
+<!--    <color name="colorSwitchTrackSelected">#FFAA2D</color>-->
+<!--    <color name="colorSwitchThumbSelected">#000000</color>-->
+<!--    <color name="colorSwitchTrackUnselected">#AAAAAA</color>-->
+<!--    <color name="colorSwitchThumbUnselected">#E8E8E8</color>-->
+
 </resources>

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">CashWizard</string>
+
+
+    <!-- Dialogs -->
+    <string name="dialog_info_label">Informacja</string>
+    <string name="dialog_warning_label">Ostrzeżenie</string>
+    <string name="dialog_error_label">Błąd</string>
+    <string name="dialog_question_label">Pytanie</string>
+
+
+    <!-- Exceptions -->
+    <string name="ex_config_load_error">Config load error</string>
+    <string name="ex_property_not_found">Property not found</string>
+    <string name="ex_property_parsing_error">Property parsing error</string>
+    <string name="ex_unknown">Unknown exception</string>
+    <string name="title_activity_main2">Main2Activity</string>
+
+
+    <!-- Screens -->
+    <!-- Welcome -->
+    <string name="welcome_appVersion_label">Wersja</string>
+    <string name="welcome_appVersionCode_label">Komp.</string>
+
+    <!-- Settings -->
+    <string name="settings_appVersion_label">Wersja</string>
+    <string name="settings_test_mode_label">Tryb testowy</string>
+    <string name="settings_load_on_startup_label">Wczytaj na starcie</string>
+    <string name="settings_save_on_exit_label">Zapisz na wyjściu</string>
+
+
+    <!-- Person details -->
+    <string name="person_details_no_crop_intent_error">"To urządzenie nie umożliwia przycinania zdjęć!"</string>
+    <string name="person_details_change_photo_question">Czy chcesz zmienić zdjęcie?</string>
+    <string name="person_details_take_new_photo_question">Czy chcesz wykonać nowe zdjęcie?</string>
+
+
+    <!-- Errors -->
+    <string name="person_id_error">Error while setting id for Person object</string>
+
+    <!-- Bill details -->
+    <string name="bill_details_no_payer_selected">"Płacący musi być wybrany!"</string>
+    <string name="bill_details_no_contributor_selected">"Przynajmniej jeden składkowicz musi być zaznaczony!"</string>
+
+</resources>
