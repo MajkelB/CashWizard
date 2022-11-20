@@ -89,7 +89,7 @@ public class ParametersHelper {
 
     public static void asyncOperation( DBOperationData<Parameter> data, ResultCallbackI resultReceiver ) {
 
-        OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder( ParameterWorker.class ).setInputData( data.toWorkData() ).build();
+        OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder( ParametersWorker.class ).setInputData( data.toWorkData() ).build();
         mWorkManager.enqueue( workRequest );
 
         mWorkManager.getWorkInfoByIdLiveData( workRequest.getId()).observe(  null, new Observer<WorkInfo>() {
@@ -97,7 +97,7 @@ public class ParametersHelper {
             public void onChanged(WorkInfo workInfo) {
                 if( resultReceiver != null ) {
                     if( workInfo.getState().isFinished() ) {
-                        resultReceiver.receiveResult(Result.OK, DBOperationData.fromWorkData( workInfo.getOutputData() ) );
+                        resultReceiver.receiveResult(Result.OK, new DBOperationData().fromWorkData( workInfo.getOutputData() ) );
                     }
                     else resultReceiver.receiveProgress( workInfo.getProgress().getInt( "PROGRESS", 0 ) );
                 }

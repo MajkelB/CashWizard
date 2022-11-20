@@ -22,7 +22,7 @@ public class SettlementsWorker extends Worker {
 
     public SettlementsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams ) {
         super(context, workerParams);
-        mOperation = DBOperationData.fromWorkData( workerParams.getInputData() );
+        mOperation = new DBOperationData<>().fromWorkData( workerParams.getInputData() );
     }
 
     @NonNull

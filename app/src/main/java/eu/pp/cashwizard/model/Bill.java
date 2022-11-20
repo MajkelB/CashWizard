@@ -25,7 +25,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode
 @Entity(tableName = "Bills")
-public class Bill implements Comparable<Bill>, Serializable {
+public class Bill extends JSONConvertable implements Comparable<Bill>, Serializable {
 
     private Long id;
     private List<Payment> payments;

@@ -2,12 +2,16 @@ package eu.pp.cashwizard.util;
 
 import android.util.Log;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
@@ -15,6 +19,7 @@ import java.util.List;
 import java.util.Set;
 
 import eu.pp.cashwizard.configuration.Conf;
+import eu.pp.cashwizard.model.JSONConvertable;
 
 public class JUtil {
 
@@ -177,6 +182,56 @@ public class JUtil {
             if( j<k) strBld.append( input.substring( j, (lineLength==null?k:j+Math.min( k-j,lineLength ) ) ) ).append( NEW_LINE );
         }
         return strBld.toString();
+    }
+
+    public static <T> String toJson( T obj ) {
+        try {
+            ObjectMapper om = new ObjectMapper();
+            return om.writeValueAsString(obj);
+        } catch ( JsonProcessingException jpe ) {
+            AUtil.logE( "Blad mapowania obiektu o typie: " + obj.getClass() + " na JSON!", jpe );
+        } catch ( Exception e ) {
+            AUtil.logE( "Blad dzialania parsera Jackson dla obiektu o typie: " + obj.getClass() + " na JSON!", e );
+        }
+        return null;
+    }
+
+    public static <T extends JSONConvertable> String toJson4List( List<T> listOfObj ) {
+        StringBuilder strBld = new StringBuilder();
+        boolean first = true;
+        strBld.append( "[" );
+
+        for( T obj: safeList( listOfObj ) ) {
+            if( first ) first = false;
+            else strBld.append( " ,,, " );
+            strBld.append( obj.toJson() );
+        }
+        strBld.append( "]" );
+        return strBld.toString();
+    }
+
+    public static <T> T fromJson( Class<T> clazz, String json ) {
+        try {
+            ObjectMapper om = new ObjectMapper();
+            return om.readValue( json, clazz );
+        } catch ( JsonProcessingException jpe ) {
+            AUtil.logE( "Blad odczytu obiektu o typie: " + clazz + "! JSON: \n" + json , jpe );
+        } catch ( Exception e ) {
+            AUtil.logE( "Blad dzialania parsera Jackson dla odczytu obiektu o typie: " + clazz+ "! JSON: " + json, e );
+        }
+        return null;
+    }
+
+    public static <T extends JSONConvertable> List<T> fromJson4List(  Class<T> clazz, String json ) {
+        if( json == null ) return null;
+        if( json.length() < 2 ) return null;
+        String str = json.substring( 1, json.length() - 1 );
+        String tab[] = str.split( " ,,, " );
+        List<T> listOfObj = new ArrayList<>();
+        for( int i=0; i< tab.length; i++ ) {
+            listOfObj.add( JUtil.fromJson( clazz, tab[i] ) );
+        }
+        return listOfObj;
     }
 
 }

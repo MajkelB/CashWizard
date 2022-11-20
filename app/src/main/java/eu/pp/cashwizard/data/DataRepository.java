@@ -441,6 +441,7 @@ public class DataRepository implements ResultCallbackI<Settlement> {
         Long id = Conf.getLongProperty( "data.lastSettlementId" );
         if( id != null )
             SettlementsHelper.getSettlementAsync( id, null );
+        //else
     }
     public static void saveSettlement() {
 

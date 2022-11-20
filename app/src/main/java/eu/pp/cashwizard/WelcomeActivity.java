@@ -24,9 +24,11 @@ import eu.pp.cashwizard.data.DataRepository;
 import eu.pp.cashwizard.data.parameter.ParametersHelper;
 import eu.pp.cashwizard.data.settlement.SettlementsHelper;
 import eu.pp.cashwizard.model.Parameter;
+import eu.pp.cashwizard.model.Person;
+import eu.pp.cashwizard.tech.NotifyCallbackI;
 import eu.pp.cashwizard.util.AUtil;
 
-public class WelcomeActivity extends AppCompatActivity {
+public class WelcomeActivity extends AppCompatActivity implements NotifyCallbackI {
 
     @BindView( R.id.welcomeVersion ) TextView version;
 
@@ -59,11 +61,25 @@ public class WelcomeActivity extends AppCompatActivity {
         AUtil.logI("Height" + height);
 //        DBClient.init( WelcomeActivity.this );
         ParametersHelper.init( WelcomeActivity.this );
-        ActivityStarter as = new ActivityStarter();
+        SettlementsHelper.init( WelcomeActivity.this );
+        ActivityStarter as = new ActivityStarter(WelcomeActivity.this );
         as.start();
     }
 
+    @Override
+    public void receiveResult(String message) {
+        if( "VERSION".equals( message ) ) {
+            version.setText( Conf.getFullVersionString() );
+        }
+    }
+
     private class ActivityStarter extends Thread {
+
+        NotifyCallbackI parent;
+
+        public ActivityStarter( NotifyCallbackI notifyCallbackI ) {
+            parent = notifyCallbackI;
+        }
 
         @Override
         public void run() {
@@ -72,9 +88,17 @@ public class WelcomeActivity extends AppCompatActivity {
             Conf.readLocalConfiguration();
             Conf.print2LogConfiguration();
             Conf.setVersion( getApplicationContext() );
-            ParametersHelper.saveParameter( new Parameter( "data.lastSettlementId" , "" + DataRepository.getSettlement().getId() ) );
-            DataRepository.loadSettlement();
-            version.setText( Conf.getFullVersionString() );
+
+            Person p = DataRepository.getPersonByName( "Majkel" );
+
+            AUtil.logI( "Majkel JSON: " + p.toJson() );
+//            Parameter p = ParametersHelper.getParameter( "data.lastSettlementId" );
+//            AUtil.logI( "$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ - " + p.getName() + " = " + p.getValue() );
+
+            //ParametersHelper.saveParameter( new Parameter( "data.lastSettlementId" , "" + DataRepository.getSettlement().getId() ) );
+            //DataRepository.loadSettlement();
+            //version.setText( Conf.getFullVersionString() );
+            //parent.receiveResult( "VERSION" );
             int l = 0;
             Random rand = new Random( new Date().getTime() );
             pb.setProgress( 0 );
@@ -86,7 +110,8 @@ public class WelcomeActivity extends AppCompatActivity {
                     Thread.sleep(BAR_STEP);
                     l = rand.nextInt(BAR_RAND);
                     pb.setProgress( (int) ( (100*i)/ BAR_TIME) + l - 10  );
-                    Log.i( "I", "" + i + " / " + BAR_TIME + " * " + ( (int) ( (100*i)/ BAR_TIME) + l - 10 )  + "%" );
+//                    Log.i( "I", "" + i + " / " + BAR_TIME + " * " + ( (int) ( (100*i)/ BAR_TIME) + l - 10 )  + "%" );
+                    AUtil.logI( "" + i + " / " + BAR_TIME + " * " + ( (int) ( (100*i)/ BAR_TIME) + l - 10 )  + "%" );
                 }
 
 

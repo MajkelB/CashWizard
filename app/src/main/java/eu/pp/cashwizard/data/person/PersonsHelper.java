@@ -96,7 +96,7 @@ public class PersonsHelper {
             public void onChanged(WorkInfo workInfo) {
                 if( resultReceiver != null ) {
                     if( workInfo.getState().isFinished() ) {
-                        resultReceiver.receiveResult(Result.OK, DBOperationData.fromWorkData( workInfo.getOutputData() ) );
+                        resultReceiver.receiveResult(Result.OK, new DBOperationData().fromWorkData( workInfo.getOutputData() ) );
                     }
                     else resultReceiver.receiveProgress( workInfo.getProgress().getInt( "PROGRESS", 0 ) );
                 }

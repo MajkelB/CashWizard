@@ -32,7 +32,7 @@ public class Conf {
     private static Context mContext;
 
     public static final String TAG = "CASHWIZARD";
-    public static String APP_VERSION = "0.0.2";
+    public static String APP_VERSION = "0.0.9";
     public static int APP_VERSION_CODE = 1;
     private static YesNo newerVersionExists = null;
 
@@ -49,7 +49,7 @@ public class Conf {
             p.load(inputStream);
             return true;
         } catch (Exception e) {
-            Log.e(TAG, Conf.getString(R.string.ex_config_load_error), e);
+            AUtil.logE( Conf.getString(R.string.ex_config_load_error), e);
         }
 
 

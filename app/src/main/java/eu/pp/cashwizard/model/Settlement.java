@@ -22,7 +22,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity(tableName = "Settlements")
-public class Settlement implements Serializable {
+public class Settlement extends JSONConvertable implements Serializable {
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name="Id")

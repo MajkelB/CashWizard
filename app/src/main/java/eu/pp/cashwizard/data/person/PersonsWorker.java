@@ -20,7 +20,7 @@ public class PersonsWorker extends Worker {
 
     public PersonsWorker(@NonNull Context context, @NonNull WorkerParameters workerParams ) {
         super(context, workerParams);
-        mOperation = DBOperationData.fromWorkData( workerParams.getInputData() );
+        mOperation = new DBOperationData<>().fromWorkData( workerParams.getInputData() );
     }
 
     @NonNull
@@ -33,7 +33,7 @@ public class PersonsWorker extends Worker {
         if( mOperation.isUpdate() ) PersonsHelper.updatePerson( (Person) mOperation.getSingleObject() );
         if( mOperation.isDelete() ) PersonsHelper.deletePerson( (Person) mOperation.getSingleObject() );
         if( mOperation.isGet() ) {
-            p = ParametersHelper.getParameter( mOperation.getName() );
+            p = ParametersHelper.getParameter( mOperation.getKey() );
         }
         setProgressAsync(new Data.Builder().putInt(PROGRESS, 100).build());
         AUtil.logI( "Person job done: " + mOperation.getOperationName()  );

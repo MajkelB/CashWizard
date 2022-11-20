@@ -25,7 +25,7 @@ import lombok.Setter;
 //@NoArgsConstructor
 //@AllArgsConstructor
 @Entity(tableName = "Person")
-public class Person {
+public class Person extends JSONConvertable{
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name="Id")

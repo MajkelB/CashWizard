@@ -21,9 +21,12 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import eu.pp.cashwizard.configuration.Conf;
 import eu.pp.cashwizard.data.DataRepository;
+import eu.pp.cashwizard.data.parameter.ParametersHelper;
+import eu.pp.cashwizard.data.settlement.SettlementsHelper;
 import eu.pp.cashwizard.dict.Action;
 import eu.pp.cashwizard.dict.YesNo;
 import eu.pp.cashwizard.model.Bill;
+import eu.pp.cashwizard.model.Parameter;
 import eu.pp.cashwizard.util.AUtil;
 import eu.pp.cashwizard.util.JUtil;
 import eu.pp.cashwizard.view.adapters.BillsListAdapter;
@@ -86,22 +89,37 @@ public class SettingsActivity extends AppCompatActivity  {
 
     @OnClick( R.id.bSettingsNew )
     public void settingsNew() {
-        DataRepository.clearSettlement();
+        //DataRepository.clearSettlement();
+//        Toast.makeText( this, "New: " + DataRepository.getSettlement().getId(), Toast.LENGTH_LONG).show();
+        Parameter p = new Parameter( "test.param", "Ala ma kota" );
         Toast.makeText( this, "New: " + DataRepository.getSettlement().getId(), Toast.LENGTH_LONG).show();
     }
     @OnClick( R.id.bSettingsLoad )
     public void settingsLoad() {
+        Toast.makeText( this, "***********", Toast.LENGTH_LONG).show();
         DataRepository.loadSettlement();
         Toast.makeText( this, "Load: " + DataRepository.getSettlement().getId(), Toast.LENGTH_LONG).show();
     }
     @OnClick( R.id.bSettingsSave )
     public void settingsSave() {
-        DataRepository.saveSettlement();
+        Toast.makeText( this, "Ala ma kota33", Toast.LENGTH_LONG).show();
+        AUtil.logD( "Save1: " + DataRepository.getSettlement().getId() );
+//        DataRepository.saveSettlement();
+//        SettlementsHelper.saveSettlementAsync( DataRepository.getSettlement() );
+//        AUtil.logD( "Save2: " + DataRepository.getSettlement().getId() );
+        try {
+            ParametersHelper.saveParameterAsync(new Parameter("data.lastSettlementId", "" + DataRepository.getSettlement().getId()));
+        } catch ( RuntimeException rte ) {
+            AUtil.logD( "### ", rte );
+        } catch ( Exception e ) {
+            AUtil.logD( "^^ ", e );
+        }
         Toast.makeText( this, "Save: " + DataRepository.getSettlement().getId(), Toast.LENGTH_LONG).show();
     }
 
     @OnClick( R.id.bSettingsOk )
     public void settingsOk() {
+
         AUtil.logD( "Clicked" );
         Conf.setStringProperty( "test.mode" , testModeL.getName() );
         Conf.setStringProperty( "data.loadOnStartup" , loadOnStartupL.getName() );

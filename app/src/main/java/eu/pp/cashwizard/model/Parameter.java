@@ -21,7 +21,7 @@ import lombok.Setter;
 //@NoArgsConstructor
 @AllArgsConstructor
 @Entity(tableName = "Parameters")
-public class Parameter implements Serializable {
+public class Parameter extends JSONConvertable implements Serializable {
 
     @PrimaryKey(autoGenerate = false)
     @ColumnInfo(name="Name")
@@ -66,4 +66,6 @@ public class Parameter implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+
 }

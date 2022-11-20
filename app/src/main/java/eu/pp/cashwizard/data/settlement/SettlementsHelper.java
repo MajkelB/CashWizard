@@ -10,10 +10,8 @@ import androidx.work.WorkManager;
 import java.util.List;
 
 import eu.pp.cashwizard.data.DBClient;
-import eu.pp.cashwizard.data.parameter.ParameterWorker;
 import eu.pp.cashwizard.dict.Operation;
 import eu.pp.cashwizard.dict.Result;
-import eu.pp.cashwizard.model.Parameter;
 import eu.pp.cashwizard.model.Settlement;
 import eu.pp.cashwizard.tech.DBOperationData;
 import eu.pp.cashwizard.tech.ResultCallbackI;
@@ -24,10 +22,14 @@ public class SettlementsHelper {
 
     private static SettlementsDao mSettlementsDao;
     private static Context mCtx;
+    private static DBOperationData<Settlement> dbOperationData;
 
     private static WorkManager mWorkManager = null;
 
      public static boolean init( Context ctx ) {
+         if( dbOperationData == null ) {
+             dbOperationData = new DBOperationData<Settlement>();
+         }
         if( ctx != null ) {
             mCtx = ctx;
             mWorkManager = WorkManager.getInstance( mCtx );
@@ -97,7 +99,7 @@ public class SettlementsHelper {
             public void onChanged(WorkInfo workInfo) {
                 if( resultReceiver != null ) {
                     if( workInfo.getState().isFinished() ) {
-                        resultReceiver.receiveResult(Result.OK, DBOperationData.fromWorkData( workInfo.getOutputData() ) );
+                        resultReceiver.receiveResult(Result.OK, new DBOperationData().fromWorkData( workInfo.getOutputData() ) );
                     }
                     else resultReceiver.receiveProgress( workInfo.getProgress().getInt( "PROGRESS", 0 ) );
                 }

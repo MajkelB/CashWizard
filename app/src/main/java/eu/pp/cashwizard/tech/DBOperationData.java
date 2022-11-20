@@ -1,5 +1,7 @@
 package eu.pp.cashwizard.tech;
 
+import android.util.JsonWriter;
+
 import androidx.work.Data;
 
 import java.util.ArrayList;
@@ -9,12 +11,13 @@ import java.util.List;
 import java.util.Map;
 
 import eu.pp.cashwizard.dict.Operation;
-import eu.pp.cashwizard.model.Parameter;
+import eu.pp.cashwizard.model.JSONConvertable;
+import eu.pp.cashwizard.util.JUtil;
 
-public class DBOperationData<T> {
+public class DBOperationData<T extends JSONConvertable> extends JSONConvertable {
     Operation operation;
     long id;
-    String name;
+    String key;
     Date date;
     T singleObject;
     List<T> listOfObjects = new ArrayList<>();
@@ -35,9 +38,9 @@ public class DBOperationData<T> {
         this.id = id;
     }
 
-    public DBOperationData( Operation operation, String name) {
+    public DBOperationData( Operation operation, String key) {
         this.operation = operation;
-        this.name = name;
+        this.key = key;
     }
 
     public DBOperationData(Operation operation, T singleObject) {
@@ -52,26 +55,28 @@ public class DBOperationData<T> {
 
     public Data toWorkData() {
         Map<String, Object> dataMap = new HashMap<>();
-        dataMap.put( "operation" , operation );
-        if( operation.equals( Operation.GET ) || operation.equals( Operation.DELETE ) ) dataMap.put( "name", name );
-        if( operation.equals( Operation.UPDATE ) || operation.equals( Operation.INSERT ) ) dataMap.put( "singleObject", singleObject );
-        if( operation.equals( Operation.GET_ALL ) ) dataMap.put( "listOfObjects", singleObject );
+//        dataMap.put( "operation", operation.name() );
+//        if( operation.equals( Operation.GET ) || operation.equals( Operation.DELETE ) ) dataMap.put( "kay", key );
+//        if( operation.equals( Operation.UPDATE ) || operation.equals( Operation.INSERT ) ) dataMap.put( "singleObject", (String) singleObject.toJson() );
+//        if( operation.equals( Operation.GET_ALL ) ) dataMap.put( "listOfObjects", (String) JUtil.toJson4List( listOfObjects ) );
+//        androidx.work.Data workData = new androidx.work.Data.Builder().putAll( dataMap ).build();
+        dataMap.put( "data", this.toJson() );
         androidx.work.Data workData = new androidx.work.Data.Builder().putAll( dataMap ).build();
         return workData;
     }
 
-    public static DBOperationData fromWorkData( Data data ) {
+    public DBOperationData fromWorkData( Data data ) {
         Map<String, Object> dataMap = data.getKeyValueMap();
-        Operation operation = (Operation) dataMap.get( "operation" );
-        DBOperationData operationData = null;
+        Operation operation = Operation.decode( (String) dataMap.get( "operation" ) );
+        DBOperationData<T> operationData = null;
         switch ( operation ) {
             case GET:
-                Parameter parameter = (Parameter) dataMap.get( "singleObject" );
-                operationData = new DBOperationData( operation, parameter );
+                T obj = (T) dataMap.get( "singleObject" );
+                operationData = new DBOperationData( operation, obj );
                 break;
             case GET_ALL:
-                List<Parameter> parameters = (List<Parameter>) dataMap.get( "listOfObjects" );
-                operationData = new DBOperationData( operation, parameters );
+                List<T> objects = (List<T>) dataMap.get( "listOfObjects" );
+                operationData = new DBOperationData( operation, objects );
                 break;
             case INSERT: break;
             case UPDATE: break;
@@ -127,12 +132,12 @@ public class DBOperationData<T> {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getKey() {
+        return key;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setKey(String key) {
+        this.key = key;
     }
 
     public Date getDate() {
@@ -158,4 +163,20 @@ public class DBOperationData<T> {
     public void setListOfObjects(List<T> listOfObjects) {
         this.listOfObjects = listOfObjects;
     }
+
+    public String toJson() {
+        return this.toJson();
+    }
+
+    public DBOperationData<T> fromJson2This( Class<DBOperationData<T>> clazz, String json ) {
+        DBOperationData<T> operationData = JUtil.fromJson( clazz, json );
+        this.operation = operationData.operation;
+        this.id = operationData.id;
+        this.key = operationData.key;
+        this.date = operationData.date;
+        this.singleObject = operationData.singleObject;
+        this.listOfObjects = operationData.listOfObjects;
+        return operationData;
+    }
+
 }

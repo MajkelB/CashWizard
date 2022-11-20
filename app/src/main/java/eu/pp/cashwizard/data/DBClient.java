@@ -22,6 +22,7 @@ public class DBClient {
     private DBClient( Context ctx ) {
         mCtx = ctx;
         mDB = Room.databaseBuilder( ctx, DB.class, Conf.DB_FILE_NAME ).addMigrations( MIGRATION_1_2 ).build();
+//        mDB = Room.databaseBuilder( ctx, DB.class, Conf.DB_FILE_NAME ).addMigrations( MIGRATION_0_1 ).build();
     }
 
 //    public static void init( Context ctx ) {
@@ -48,7 +49,7 @@ public class DBClient {
     private static Migration MIGRATION_1_2 = new Migration(1,2) {
         @Override
         public void migrate(@NonNull SupportSQLiteDatabase database) {
-            mCtx.deleteDatabase(Conf.DB_FILE_NAME );
+            //mCtx.deleteDatabase(Conf.DB_FILE_NAME );
         }
     };
 
